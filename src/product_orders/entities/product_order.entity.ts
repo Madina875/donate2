@@ -12,6 +12,7 @@ import { Product } from "../../product/entities/product.entity";
 import { User } from "../../user/models/user.model";
 import { Curyer } from "../../curyer/models/curyer.model";
 import { Payment } from "../../payment/entities/payment.entity";
+import { ProductReview } from "../../product_reviews/entities/product_review.entity";
 
 interface IProductOrderCreationAttr {
   buyerId: number;
@@ -124,4 +125,7 @@ export class ProductOrder extends Model<
 
   @HasMany(() => Payment)
   declare payment: Payment[];
+
+  @HasMany(() => ProductReview)
+  declare product_reviews: ProductReview[];
 }

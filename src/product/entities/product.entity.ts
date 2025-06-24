@@ -12,6 +12,7 @@ import { Categories } from "../../categories/models/categories.model";
 import { ProductImages } from "../../product_images/entities/product_image.entity";
 import { ApiProperty } from "@nestjs/swagger";
 import { ProductOrder } from "../../product_orders/entities/product_order.entity";
+import { ProductReview } from "../../product_reviews/entities/product_review.entity";
 // import { ProductImage } from "../../product_images/entities/product_image.entity";
 
 interface IProductCreationattr {
@@ -99,7 +100,10 @@ export class Product extends Model<Product, IProductCreationattr> {
 
   @BelongsTo(() => User, "creatorId")
   declare creator: User;
-  
+
   @HasMany(() => ProductOrder)
   declare product_order: ProductOrder[];
+
+  @HasMany(() => ProductReview)
+  declare product_reviews: ProductReview[];
 }
