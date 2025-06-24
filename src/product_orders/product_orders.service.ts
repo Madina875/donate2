@@ -1,26 +1,38 @@
-import { Injectable } from '@nestjs/common';
-import { CreateProductOrderDto } from './dto/create-product_order.dto';
-import { UpdateProductOrderDto } from './dto/update-product_order.dto';
+import { Injectable } from "@nestjs/common";
+import { CreateProductOrderDto } from "./dto/create-product_order.dto";
+import { UpdateProductOrderDto } from "./dto/update-product_order.dto";
+import { InjectModel } from "@nestjs/sequelize";
+import { ProductOrder } from "./entities/product_order.entity";
 
 @Injectable()
 export class ProductOrdersService {
+  constructor(
+    @InjectModel(ProductOrder)
+    private readonly productOrderModel: typeof ProductOrder
+  ) {}
+  
   create(createProductOrderDto: CreateProductOrderDto) {
-    return 'This action adds a new productOrder';
+    return this.productOrderModel.create(createProductOrderDto);
   }
 
   findAll() {
-    return `This action returns all productOrders`;
+    return this.productOrderModel.findAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} productOrder`;
+    return this.productOrderModel.findByPk(id);
   }
 
-  update(id: number, updateProductOrderDto: UpdateProductOrderDto) {
-    return `This action updates a #${id} productOrder`;
+  async update(id: number, updateProductOrderDto: UpdateProductOrderDto) {
+    const order = await this.productOrderModel.update(updateProductOrderDto, {
+      where: { id },
+      returning: true,
+    });
+    return order[1][0];
   }
 
   remove(id: number) {
-    return `This action removes a #${id} productOrder`;
+    return this.productOrderModel.destroy({ where: { id } });
   }
 }
+

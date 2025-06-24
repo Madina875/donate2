@@ -67,7 +67,7 @@ import { ProductOrder } from "./product_orders/entities/product_order.entity";
       ],
       autoLoadModels: true,
       logging: false,
-      sync: { alter: true },
+      sync: { alter: false },
     }),
     AdminModule,
     CuryerModule,

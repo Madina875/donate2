@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, DataType, Model, Table } from "sequelize-typescript"; //
+import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript"; //
+import { ProductOrder } from "../../product_orders/entities/product_order.entity";
 
 interface ICuryerCreateAttr {
   full_name: string;
@@ -77,4 +78,7 @@ export class Curyer extends Model<Curyer, ICuryerCreateAttr> {
     type: DataType.ENUM("motorcycle", "bicycle", "car", "van"),
   })
   declare vehicle_type: "motorcycle" | "bicycle" | "car" | "van";
+
+  @HasMany(() => ProductOrder)
+  declare product_order: ProductOrder[];
 }

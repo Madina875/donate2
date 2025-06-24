@@ -23,7 +23,7 @@ export class CreateProductOrderDto {
     example: 1,
     description: "product id",
   })
-  productid: number;
+  productId: number;
   @ApiProperty({
     example: 1,
     description: " quantity",

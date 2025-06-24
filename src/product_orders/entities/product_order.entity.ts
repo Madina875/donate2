@@ -1,15 +1,20 @@
 import { ApiProperty } from "@nestjs/swagger";
 import {
   AutoIncrement,
+  BelongsTo,
   Column,
   DataType,
+  ForeignKey,
   Model,
   PrimaryKey,
   Table,
 } from "sequelize-typescript";
+import { Product } from "../../product/entities/product.entity";
+import { User } from "../../user/models/user.model";
+import { Curyer } from "../../curyer/models/curyer.model";
 
 interface IProductOrderCreationAttr {
-  buyerid: number;
+  buyerId: number;
   productId: number;
   quantity: number;
   total_price: number;
@@ -34,11 +39,13 @@ export class ProductOrder extends Model<
     primaryKey: true,
     autoIncrement: true,
   })
+  @ForeignKey(() => User)
   @ApiProperty({
     example: 1,
     description: "buyer name ",
   })
   declare buyerId: number;
+  @ForeignKey(() => Product)
   @ApiProperty({
     example: 1,
     description: "product name ",
@@ -88,6 +95,8 @@ export class ProductOrder extends Model<
     type: DataType.STRING,
   })
   declare phone_number: string;
+  @ForeignKey(() => Curyer)
+  
   @ApiProperty({
     example: 1,
     description: "curyer name ",
@@ -104,4 +113,11 @@ export class ProductOrder extends Model<
     type: DataType.ENUM("pending", "on_the_way", "delivered", "cancelled"),
   })
   declare delivery_status: string;
+
+  @BelongsTo(() => Curyer, "curyerId")
+  declare curyer: Curyer;
+  @BelongsTo(() => Product, "productId")
+  declare product: Product;
+  @BelongsTo(() => User, "buyerId")
+  declare buyer: User;
 }

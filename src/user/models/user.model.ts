@@ -2,6 +2,7 @@ import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
 import { Notification } from "../../notifications/models/notification.model";
 import { Donation } from "src/donations/models/donation.model";
 import { Product } from "../../product/entities/product.entity";
+import { ProductOrder } from "../../product_orders/entities/product_order.entity";
 export enum userRole {
   CREATOR = "creator",
   USER = "user",
@@ -74,4 +75,6 @@ export class User extends Model<User, IUserCreateAattr> {
 
   @HasMany(() => Product)
   declare product: Product[];
+  @HasMany(() => ProductOrder)
+  declare product_order: ProductOrder[];
 }
