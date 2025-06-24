@@ -1,0 +1,20 @@
+
+Authentication:
+
+nest g res auth --no-spec
+npm i bcrypt
+npm i -D @types/bcrypt
+npm install --save @nestjs/jwt
+
+
+details:
+
+npm i --save @nestjs/config
+npm install --save @nestjs/sequelize sequelize sequelize-typescript pg
+npm install --save-dev @types/sequelize (podskazka un )
+
+nest g mo <company> - module yaratadi
+nest g co <company>  --no-spec     - controller yaratadi
+nest g s <company>  --no-spec     - service yaratadi
+
+nest g res <> --no-spec
