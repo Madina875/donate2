@@ -32,6 +32,8 @@ import { SaveItemsModule } from "./save_items/save_items.module";
 import { SaveItem } from "./save_items/entities/save_item.entity";
 import { ProductOrdersModule } from "./product_orders/product_orders.module";
 import { ProductOrder } from "./product_orders/entities/product_order.entity";
+import { PaymentModule } from "./payment/payment.module";
+import { Payment } from "./payment/entities/payment.entity";
 
 @Module({
   imports: [
@@ -64,10 +66,11 @@ import { ProductOrder } from "./product_orders/entities/product_order.entity";
         Withdraw,
         SaveItem,
         ProductOrder,
+        Payment,
       ],
       autoLoadModels: true,
-      logging: false,
-      sync: { alter: false },
+      logging: true,
+      sync: { alter: true },
     }),
     AdminModule,
     CuryerModule,
@@ -84,6 +87,7 @@ import { ProductOrder } from "./product_orders/entities/product_order.entity";
     WithdrawsModule,
     SaveItemsModule,
     ProductOrdersModule,
+    PaymentModule,
   ],
 
   controllers: [],

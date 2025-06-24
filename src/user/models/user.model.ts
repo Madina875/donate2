@@ -3,6 +3,7 @@ import { Notification } from "../../notifications/models/notification.model";
 import { Donation } from "src/donations/models/donation.model";
 import { Product } from "../../product/entities/product.entity";
 import { ProductOrder } from "../../product_orders/entities/product_order.entity";
+import { Payment } from "../../payment/entities/payment.entity";
 export enum userRole {
   CREATOR = "creator",
   USER = "user",
@@ -77,4 +78,7 @@ export class User extends Model<User, IUserCreateAattr> {
   declare product: Product[];
   @HasMany(() => ProductOrder)
   declare product_order: ProductOrder[];
+  
+  @HasMany(() => Payment)
+  declare payment: Payment[];
 }
